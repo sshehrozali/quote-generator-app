@@ -8,31 +8,34 @@ document.getElementById("today").innerText = currentDate;   // Inject into HTML
 
 
 
-// Storage for quotes
-let quotes = ["'That’s who you really like. The people you can think out loud in front of.'",
-    "'Since we cannot know all that there is to be known about anything, we ought to know a little about everything.'",
-    "'Work Smart not Hard'"]
-
-// Set counter to 0
-quoteNo = 0;
-
 // Once page is loaded successfully
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("displayQuote").innerText = quotes[0];  // Inject into HTML
-    quoteNo += 1;   // Update Quote Counter
-})
-
-
-
+document.addEventListener("DOMContentLoaded", generateQuote);
 
 // When button is clicked
-document.getElementById("generate").addEventListener("click", function () {
+document.getElementById("generate").addEventListener("click", generateQuote);
 
-    // Check if it reaches the end
-    if (quoteNo == quotes.length) {
-        quoteNo = 0;    // Reset Counter to 0
-    }
 
-    document.getElementById("displayQuote").innerText = quotes[quoteNo];    // Inject into HTML
-    quoteNo += 1;   // Update Quote Counter
-})
+
+
+
+
+// Function to generate Random Quotes
+function generateQuote() {
+
+    // Call API
+    fetch("http://api.quotable.io/random")      // Returns a Promise
+        .then(responseCall => responseCall.json())
+        .then(fetchQuote => {
+
+            let originalQuote = fetchQuote.content;     // Fetch Quote from JSON
+
+            // Modify Quote formatting
+            let firstQuotationMark = "'";
+            let secondQuotationMark = "'";
+
+            let modifiedver = firstQuotationMark.concat(originalQuote);
+            let finalVer = modifiedver.concat(secondQuotationMark);
+
+            document.getElementById("displayQuote").innerText = finalVer;       // Inject into HTML
+        })
+}
