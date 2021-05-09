@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", generateQuote);
 // When button is clicked
 document.getElementById("generate").addEventListener("click", generateQuote);
 
+// Copy to clipboard
+document.getElementById("copyClipboard").addEventListener("click", copyToclipboard);
 
 
 
@@ -32,10 +34,24 @@ function generateQuote() {
             // Modify Quote formatting
             let firstQuotationMark = "'";
             let secondQuotationMark = "'";
+            let hyphenSymbol = "-";
 
             let modifiedver = firstQuotationMark.concat(originalQuote);
             let finalVer = modifiedver.concat(secondQuotationMark);
 
-            document.getElementById("displayQuote").innerText = finalVer;       // Inject into HTML
+            // Inject into HTML
+            document.getElementById("displayQuote").innerText = finalVer;
+            document.getElementById("author").innerText = hyphenSymbol.concat(fetchQuote.author);
         })
+}
+
+// Function to copy from clipboard
+function copyToclipboard() {
+    let insideTxt = document.getElementById("displayQuote").innerText;
+
+    // Select the text field
+    insideTxt.select();
+    insideTxt.setSelectionRange(0, 99999);  // For Mobile Devices
+
+    document.execCommand("copy");       // Copy text from the field
 }
