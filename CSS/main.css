@@ -1,0 +1,28 @@
+body{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #231123;
+}
+
+.card{
+    background: #82204A !important;
+    color: white !important;
+}
+
+.btn{
+    background: #558C8C !important;
+    border-color: #1e5252 !important;
+}
+
+    .btn:hover{
+        background: #217e7e !important;
+    }
+
+    .btn:focus{
+        box-shadow: none !important;
+    }
