@@ -25,7 +25,7 @@ document.getElementById("copyClipboard").addEventListener("click", copyToclipboa
 function generateQuote() {
 
     // Call API
-    fetch("http://api.quotable.io/random")      // Returns a Promise
+    fetch("https://api.quotable.io/random")      // Returns a Promise
         .then(responseCall => responseCall.json())
         .then(fetchQuote => {
 
