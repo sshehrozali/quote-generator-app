@@ -31,3 +31,7 @@ body{
     background: #558c8c4b !important;
     border-color: #558c8c4b !important;
 }
+
+.copied{
+    color: white !important;
+}

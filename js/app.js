@@ -24,6 +24,10 @@ document.getElementById("copyClipboard").addEventListener("click", copyToclipboa
 // Function to generate Random Quotes
 function generateQuote() {
 
+    // Reset copy to clipboard button
+    document.getElementById("copyClipboard").innerText = "📋";
+    document.getElementById("copyClipboard").classList.remove("copied");
+
     // Call API
     fetch("https://api.quotable.io/random")      // Returns a Promise
         .then(responseCall => responseCall.json())
@@ -45,13 +49,18 @@ function generateQuote() {
         })
 }
 
-// Function to copy from clipboard
+// Function to copy to clipboard
 function copyToclipboard() {
-    let insideTxt = document.getElementById("displayQuote").innerText;
 
-    // Select the text field
-    insideTxt.select();
-    insideTxt.setSelectionRange(0, 99999);  // For Mobile Devices
+    let r = document.createRange();
 
-    document.execCommand("copy");       // Copy text from the field
+    r.selectNode(document.getElementById("displayQuote"));      // Get <p> tag
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(r);
+
+    document.execCommand("copy");       // Copy to clipboard
+    window.getSelection().removeAllRanges();
+
+    document.getElementById("copyClipboard").innerText = "Copied!";
+    document.getElementById("copyClipboard").classList.add("copied");
 }
